@@ -22,10 +22,10 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
-config :cors_plug,
-  origin: ["*"],
-  max_age: 86400,
-  methods: ["GET", "POST", "PUT"]
+# config :cors_plug,
+#   origin: ["*"],
+#   max_age: 86400,
+#   methods: ["GET", "POST", "PUT"]
 
 
 # Import environment specific config. This must remain at the bottom
