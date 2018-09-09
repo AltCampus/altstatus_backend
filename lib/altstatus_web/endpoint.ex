@@ -39,6 +39,7 @@ defmodule AltstatusWeb.Endpoint do
 
 
   plug CORSPlug, origin: "*"
+  plug CORSPlug, headers: ["Content-Type", "Authorization", "authorization", "Accept", "Origin"]
   plug AltstatusWeb.Router
 
   @doc """
