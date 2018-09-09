@@ -21,6 +21,12 @@ defmodule Altstatus.Resources do
     Repo.all(Submission)
   end
 
+  def list_submissions(user_id) do
+    Submission 
+    |> where([s], s.user_id ==^user_id)
+    |> Repo.all
+  end
+
   @doc """
   Gets a single submission.
 

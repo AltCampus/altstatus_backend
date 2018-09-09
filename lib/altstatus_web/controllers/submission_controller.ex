@@ -39,4 +39,9 @@ defmodule AltstatusWeb.SubmissionController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def filter_submission(conn, %{"user_id" => user_id}) do
+    submissions = Resources.list_submissions(user_id)
+    render(conn, "index.json", submissions: submissions)
+  end
 end

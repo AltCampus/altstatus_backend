@@ -15,7 +15,7 @@ defmodule Altstatus.Resources.Submission do
   @doc false
   def changeset(submission, attrs) do
     submission
-    |> cast(attrs, [:twitter_url, :reflection, :medium_url])
-    |> validate_required([:twitter_url, :reflection, :medium_url])
+    |> cast(attrs, [:twitter_url, :reflection, :medium_url, :user_id])
+    |> validate_required([:twitter_url, :reflection, :user_id])
   end
 end
