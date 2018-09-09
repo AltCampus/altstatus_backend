@@ -14,6 +14,8 @@ defmodule AltstatusWeb.SubmissionView do
     %{id: submission.id,
       twitter_url: submission.twitter_url,
       reflection: submission.reflection,
-      medium_url: submission.medium_url}
+      medium_url: submission.medium_url,
+      timestamp: submission.inserted_at
+    }
   end
 end

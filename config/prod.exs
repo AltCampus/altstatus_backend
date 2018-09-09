@@ -23,6 +23,11 @@ config :altstatus, AltstatusWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :cors_plug,
+  origin: ["http://192.168.0.107:3000", "http://localhost:3000"],
+  max_age: 86400,
+  methods: ["GET", "POST", "PUT"]
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

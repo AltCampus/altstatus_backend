@@ -35,9 +35,9 @@ defmodule Altstatus.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload(:batch)
 
-  def get_user_by_email(email), do: Repo.get_by(User, email: email)
+  def get_user_by_email(email), do: Repo.get_by(User, email: email) |> Repo.preload(:batch)
 
   @doc """
   Creates a user.
@@ -102,5 +102,102 @@ defmodule Altstatus.Accounts do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+
+  alias Altstatus.Accounts.Admin
+
+  @doc """
+  Returns the list of admins.
+
+  ## Examples
+
+      iex> list_admins()
+      [%Admin{}, ...]
+
+  """
+  def list_admins do
+    Repo.all(Admin)
+  end
+
+  @doc """
+  Gets a single admin.
+
+  Raises `Ecto.NoResultsError` if the Admin does not exist.
+
+  ## Examples
+
+      iex> get_admin!(123)
+      %Admin{}
+
+      iex> get_admin!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_admin!(id), do: Repo.get!(Admin, id)
+  def get_admin_by_email(email), do: Repo.get_by(Admin, email: email)
+
+  @doc """
+  Creates a admin.
+
+  ## Examples
+
+      iex> create_admin(%{field: value})
+      {:ok, %Admin{}}
+
+      iex> create_admin(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_admin(attrs \\ %{}) do
+    %Admin{}
+    |> Admin.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a admin.
+
+  ## Examples
+
+      iex> update_admin(admin, %{field: new_value})
+      {:ok, %Admin{}}
+
+      iex> update_admin(admin, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_admin(%Admin{} = admin, attrs) do
+    admin
+    |> Admin.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Admin.
+
+  ## Examples
+
+      iex> delete_admin(admin)
+      {:ok, %Admin{}}
+
+      iex> delete_admin(admin)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_admin(%Admin{} = admin) do
+    Repo.delete(admin)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking admin changes.
+
+  ## Examples
+
+      iex> change_admin(admin)
+      %Ecto.Changeset{source: %Admin{}}
+
+  """
+  def change_admin(%Admin{} = admin) do
+    Admin.changeset(admin, %{})
   end
 end

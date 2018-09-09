@@ -1,13 +1,11 @@
-defmodule Altstatus.Accounts.User do
+defmodule Altstatus.Accounts.Admin do
   use Ecto.Schema
   import Ecto.Changeset
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
-  schema "users" do
+  schema "admins" do
     field :email, :string
-    field :name, :string
     field :password_hash, :string
-    belongs_to :batch, Altstatus.Admission.Batch
 
     timestamps()
 
@@ -15,11 +13,10 @@ defmodule Altstatus.Accounts.User do
   end
 
   @doc false
-  def changeset(user, attrs) do
-    user
-    |> cast(attrs, [:name, :email, :password, :batch_id])
-    |> validate_required([:name, :email, :batch_id])
-    |> unique_constraint(:email)
+  def changeset(admin, attrs) do
+    admin
+    |> cast(attrs, [:email, :password])
+    |> validate_required([:email, :password])
     |> hash_password
   end
 
