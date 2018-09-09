@@ -2,10 +2,10 @@
 
 ## What is AltStatus?
 
-When you are learning something, it's beneficial to track your learning process. At AltCampus students are required to do a bunch of things to keep track of their progress. They have to tweet daily about what did they learn that day and write a blog post once a week. Beside tweets and blog, students will also write a reflection of that particular day.  Altstatus helps them to organize and track their progress.
+When you are learning new skills, it's beneficial to track your learning process. At AltCampus students are required to do a bunch of things to keep track their progress. They have to tweet daily about what did they learn that day and write a blog post once a week. Beside tweets and blog, students will also write a reflection of that particular day.  AltStatus helps them to organize and track their progress.
 
 
-A Student can submit their tweet URL, blog-post URL(if it's Saturday) and reflection of the day. By this way, they can track of their progress. They will get a notification at a specific time of the day, asking them about whether they had submited the links or not.
+A Student can submit their tweet URL, blog-post URL every Saturday and reflection of the day. By this way, they can track of their progress. They will get a notification at a specific time of the day, asking them about whether they had submited the links or not.
 
 
 ## Student flow
