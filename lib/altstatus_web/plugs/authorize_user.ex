@@ -7,8 +7,9 @@ defmodule AltstatusWeb.Plugs.AuthorizeUser do
 	 end
 
   def call(conn, _params) do
-  	if Enum.any?(get_req_header(conn, "token")) do
-      [token | _] = get_req_header(conn, "token")
+    IO.inspect conn
+  	if Enum.any?(get_req_header(conn, "authorization")) do
+      [token | _] = get_req_header(conn, "authorization")
       case Phoenix.Token.verify(conn, "user salt", token) do
         {:ok, _user_id} -> 
           conn

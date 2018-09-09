@@ -38,9 +38,9 @@ defmodule AltstatusWeb.SessionController do
   end
 
   def current_user(conn, _params) do
-    if Enum.any?(get_req_header(conn, "token")) do
+    if Enum.any?(get_req_header(conn, "authorization")) do
 
-      [token | _] = get_req_header(conn, "token")
+      [token | _] = get_req_header(conn, "authorization")
       case Phoenix.Token.verify(conn, "user salt", token) do
         {:ok, user_id} ->  
           user = Accounts.get_user!(user_id)
