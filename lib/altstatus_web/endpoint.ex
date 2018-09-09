@@ -37,6 +37,8 @@ defmodule AltstatusWeb.Endpoint do
     key: "_altstatus_key",
     signing_salt: "1lRk0beG"
 
+
+  plug CORSPlug, origin: "*"
   plug AltstatusWeb.Router
 
   @doc """
