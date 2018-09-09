@@ -14,6 +14,10 @@ defmodule AltstatusWeb.Router do
 
   end
 
+  pipeline :user do
+    plug AltstatusWeb.Plugs.AuthorizeUser
+  end
+
   scope "/", AltstatusWeb do
     pipe_through :browser # Use the default browser stack
 
@@ -26,12 +30,20 @@ defmodule AltstatusWeb.Router do
     post "/users/register", UserController, :create
     post "/users/login", SessionController, :user_login
     post "/users/logout", SessionController, :user_logout
-    get "/submissions/user_id", SubmissionController, :filter_submission
+    # get "/submissions/user/:user_id", SubmissionController, :filter_submission
+    get "/current_user", SessionController, :current_user
 
     resources "/batches", BatchController, except: [:new, :edit]
     resources "/users", UserController, except: [:new, :edit]
     resources "/submissions", SubmissionController, except: [:new, :edit]
+
+    scope "/" do
+      pipe_through :user
+
+      get "/submissions/user/:user_id", SubmissionController, :filter_submission
+    end
   end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", AltstatusWeb do

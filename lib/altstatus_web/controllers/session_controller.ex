@@ -10,10 +10,12 @@ defmodule AltstatusWeb.SessionController do
 
     cond do
       user &&  checkpw(pass, user.password_hash) ->
+
+        token = Phoenix.Token.sign(conn, "user salt", user.id)
         conn
         |> fetch_session
         |> put_session(:user_id, user.id)
-        |> json(%{id: user.id, email: user.email, name: user.name})
+        |> json(%{id: user.id, email: user.email, name: user.name, token: token})
 
       
       user ->
@@ -33,6 +35,26 @@ defmodule AltstatusWeb.SessionController do
     |> fetch_session
     |> delete_session(:user_id)
     |> json(%{info: "success"})
+  end
+
+  def current_user(conn, _params) do
+    if Enum.any?(get_req_header(conn, "token")) do
+
+      [token | _] = get_req_header(conn, "token")
+      case Phoenix.Token.verify(conn, "user salt", token) do
+        {:ok, user_id} ->  
+          user = Accounts.get_user!(user_id)
+
+          conn
+          |> json(%{id: user.id, email: user.email, name: user.name})  
+        {:error, _} ->  
+          conn
+          |> json(%{error: "unauthorized"})  
+      end
+    else 
+      conn
+      |> json(%{error: "unauthorized"})
+    end
   end
 
 
